@@ -1,0 +1,206 @@
+/* Please keep this file synchronized with the Adobe XD */
+
+:root {
+  /* Text and backgrounds */
+  --darkgrey: #212121;
+  --grey900: #404040;
+  --grey800: #7a7a7a;
+  --grey600: #d6d6d6;
+  --grey500: #dcdcdc;
+  --grey400: #e7e7e7;
+  --grey300: #f0f0f0;
+  --grey200: #f9f9f9;
+  --grey100: #fafafa;
+  --white: #ffffff;
+
+  /* Header */
+  --rolex-brandgreen: #006039;
+  --darkinteractivegreen300: #007f4b;
+  --rolex-brandgold: #a2803e;
+
+  /* Status */
+  --state-info-dark: #0040dd;
+  --state-info-light: #e1f0fe;
+  --state-success-dark: #288345;
+  --state-success-light: #eaf2e6;
+  --state-danger-dark: #ba0012;
+  --state-danger-light: #f6d9d8;
+
+  /* Button states (primary) */
+  --interactivegreen300: #008951;
+  --btn-primary-default: var(--interactivegreen300);
+  --interactivegreen100: #d5e9e1;
+  --btn-primary-disabled: var(--interactivegreen100);
+  --interactivegreen400: #096039;
+  --btn-primary-hover: var(--interactivegreen400);
+  --interactivegreen200: #00a05f;
+  --btn-primary-pressed: var(--interactivegreen200);
+
+  /* Button states (secondary) */
+  --btn-secondary-default: var(--grey200);
+  --btn-secondary-disabled: var(--grey100);
+  --btn-secondary-hover: var(--grey500);
+  --btn-secondary-pressed: var(--grey400);
+
+  /* Button states (tertiary) */
+  --btn-tertiary-default-outline: var(--grey400);
+  --btn-tertiary-disabled-outline: var(--grey300);
+  --btn-tertiary-hover: #e8e8e8;
+  --btn-tertiary-pressed: var(--grey300);
+
+  /* Spacing */
+  --spacing-xxl: 32px;
+  --spacing-xl: 24px;
+  --spacing-l: 16px;
+  --spacing-m: 12px;
+  --spacing-s: 8px;
+  --spacing-xs: 4px;
+
+  /* Fonts */
+  --font-color-default: var(--darkgrey);
+  --font-xxl: 24px;
+  --font-xl: 18px;
+  --font-l: 16px;
+  --font-m: 14px;
+  --font-s: 12px;
+  --font-xs: 10px;
+  --font-xxs: 8px;
+  --font: "Helvetica Now Text";
+  --font-rolex: "RolexFont";
+  --font-weight-bold: 600;
+  --font-weight-medium: 500;
+  --font-weight-regular: 500;
+
+  /* Animations */
+  --animation-slide-duration: 300ms;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font), sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-m);
+  background-color: var(--grey100);
+  color: var(--font-color-default);
+}
+
+h1 {
+  font-family: var(--font), sans-serif;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-xxl);
+  margin: 0;
+}
+
+h2 {
+  font-family: var(--font), sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-xl);
+  margin: 0;
+}
+
+h3 {
+  font-family: var(--font), sans-serif;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-l);
+  margin: 0;
+}
+
+.typo-navigation {
+  font-family: var(--font), sans-serif;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-m);
+  color: var(--font-color-default);
+}
+
+.typo-subtitle {
+  font-family: var(--font-rolex), sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-xs);
+}
+
+.typo-table-text {
+  font-family: var(--font), sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-s);
+  color: #707070;
+}
+
+.typo-tooltip-label {
+  font-family: var(--font), sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-xs);
+  color: #707070;
+}
+
+.typo-body1-bold {
+  font-family: var(--font), sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-m);
+}
+
+.typo-body1 {
+  font-family: var(--font), sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-m);
+}
+
+.typo-body2-bold {
+  font-family: var(--font), sans-serif;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-s);
+}
+
+.typo-body2 {
+  font-family: var(--font), sans-serif;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-s);
+}
+
+.typo-body3 {
+  font-family: var(--font), sans-serif;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-xs);
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.grey600 {
+  color: var(--grey600);
+}
+
+.grey800 {
+  color: var(--grey800);
+}
+
+.darkgrey {
+  color: var(--darkgrey);
+}
+
+input[type="radio"] {
+  box-sizing: border-box;
+  width: 14px;
+  height: 14px;
+  margin: 6px;
+  padding: 0;
+  border: 1px solid var(--darkgrey);
+  border-radius: 50%;
+  appearance: none;
+  background-color: transparent;
+  outline: none;
+}
+
+input[type="radio"]:not(:disabled):checked {
+  border-color: var(--interactivegreen300);
+  background-color: var(--interactivegreen300);
+  background-clip: content-box;
+  padding: 2px;
+  background-image: radial-gradient(
+    circle,
+    var(--radio-checked-color) 0%,
+    var(--radio-checked-color) 50%,
+    transparent 60%,
+    transparent 100%
+  );
+}
