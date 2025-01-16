@@ -1,0 +1,94 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Hover tooltips",
+      "description": "Implement Hover Tooltip for Avatar",
+      "deadlineAt": "2025-09-09",
+      "assignee": "John Smith",
+      "category": 1
+    },
+    {
+      "id": 2,
+      "name": "Build project",
+      "description": "Build project structure",
+      "deadlineAt": "2023-09-09",
+      "assignee": "Annabel",
+      "category": 2
+    },
+    {
+      "id": 3,
+      "name": "Display tasks",
+      "description": "Display list of tasks",
+      "deadlineAt": "2025-09-09",
+      "assignee": "Daniel",
+      "category": 3
+    },
+    {
+      "id": 4,
+      "name": "Display task details",
+      "description": "Display task details",
+      "deadlineAt": "2023-09-09",
+      "assignee": "John Smith",
+      "category": 1
+    },
+    {
+      "id": 5,
+      "name": "Create new task",
+      "description": "Add new task",
+      "deadlineAt": "2023-09-09",
+      "assignee": "Daniel",
+      "category": 1
+    },
+    {
+      "id": 6,
+      "name": "Update task",
+      "description": "Update task",
+      "deadlineAt": "2023-09-09",
+      "assignee": "John Smith",
+      "category": 1
+    },
+    {
+      "id": 7,
+      "name": "Remove task",
+      "description": "Remove task",
+      "deadlineAt": "2025-09-09",
+      "assignee": "John Smith",
+      "category": 1
+    },
+    {
+      "id": 8,
+      "name": "Improve",
+      "description": "Remove task",
+      "deadlineAt": "2023-09-09",
+      "assignee": "John Smith",
+      "category": 1
+    },
+    {
+      "id": 9,
+      "name": "UI Improvements",
+      "description": "UI improvements",
+      "deadlineAt": "2025-09-09",
+      "assignee": "John Smith",
+      "category": 4
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "TO DO"
+    },
+    {
+      "id": 2,
+      "name": "IN PROGRESS"
+    },
+    {
+      "id": 3,
+      "name": "REVIEW"
+    },
+    {
+      "id": 4,
+      "name": "DONE"
+    }
+  ]
+}

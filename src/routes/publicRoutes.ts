@@ -10,10 +10,10 @@ export const publicRoutes: RouteObject[] = [
     shouldRevalidate: () => false,
     children: [
       {
-        id: "homepage",
-        path: "homepage",
+        id: "tasks",
+        path: "tasks",
         lazy: async () => ({
-          Component: (await import("./../domain/homepage/Homepage")).Homepage,
+          Component: (await import("../domain/Task/TaskListPage")).TaskListPage,
         }),
       },
     ],
