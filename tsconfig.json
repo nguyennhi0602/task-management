@@ -16,7 +16,7 @@
     "noEmit": true,
     "useDefineForClassFields": false,
     "jsx": "react-jsx",
-    "types": ["@testing-library/jest-dom", "node", "vitest/globals"]
+    "types": []
   },
   "include": ["src"]
 }
