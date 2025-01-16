@@ -10,6 +10,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import EditIcon from "@mui/icons-material/Edit";
+import moment from "moment";
 
 export type TaskCardProp = {
   taskDetail: Task;
@@ -100,7 +101,7 @@ export const TaskCard = (props: TaskCardProp) => {
       </Header>
       <DetailsWrapper>
         <DeadlineWrapper $isExpired={isExpired(taskDetail.deadlineAt)}>
-          {taskDetail.deadlineAt}
+          {moment(new Date(taskDetail.deadlineAt)).format("DD-MM-YYYY")}
         </DeadlineWrapper>
         <Tooltip title={taskDetail.assignee} arrow>
           <Avatar

@@ -12,9 +12,10 @@ import { DateField } from "@mui/x-date-pickers/DateField";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useEffect, useState } from "react";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { MenuItem, Select } from "@mui/material";
 import { categories } from "../../db.json";
+import moment from "moment";
 
 export type CreateTaskModalProps = {
   taskDetail: Task | undefined;
@@ -80,9 +81,18 @@ export const CreateTaskModal = (props: CreateTaskModalProps) => {
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
+    console.log("value");
+    console.log(event.target);
     setFormData({
       ...formData,
       [name]: value,
+    });
+  };
+
+  const handleChangeDeadline = (newDate: Dayjs | null) => {
+    setFormData({
+      ...formData,
+      deadlineAt: newDate ? newDate.format("YYYY-MM-DD") : "",
     });
   };
 
@@ -155,7 +165,7 @@ export const CreateTaskModal = (props: CreateTaskModalProps) => {
                 label="Deadline"
                 format="DD-MM-YYYY"
                 value={dayjs(formData.deadlineAt)}
-                onChange={handleChange}
+                onChange={handleChangeDeadline}
                 name="deadlineAt"
               />
             </LocalizationProvider>
