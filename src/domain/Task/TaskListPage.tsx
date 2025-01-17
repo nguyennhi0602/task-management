@@ -78,6 +78,12 @@ export const TaskListPage = () => {
     const newMockData = mockData.filter((data) => data.id !== id);
     setMockData(newMockData);
     setOpenDeleteTaskConfirmModal(false);
+    setSelectedTask(undefined);
+  };
+
+  const handleCloseDeleteTaskModal = () => {
+    setOpenDeleteTaskConfirmModal(false);
+    setSelectedTask(undefined);
   };
 
   return (
@@ -116,7 +122,7 @@ export const TaskListPage = () => {
       ></CreateTaskModal>
       <DeleteTaskConfirmModal
         open={isOpenDeleteTaskConfirmModal}
-        onClose={() => setOpenDeleteTaskConfirmModal(false)}
+        onClose={handleCloseDeleteTaskModal}
         onDelete={() => handleDeleteTask(selectedTask?.id)}
         taskDetail={selectedTask}
       ></DeleteTaskConfirmModal>
