@@ -1,4 +1,8 @@
 {
+  "user": {
+    "username": "admin@openwt.com",
+    "password": "123456"
+  },
   "tasks": [
     {
       "id": 1,

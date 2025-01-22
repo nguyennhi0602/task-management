@@ -9,6 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { CreateTaskModal } from "./CreateTaskModal";
 import moment from "moment";
 import { DeleteTaskConfirmModal } from "./DeleteTaskConfirmModal";
+import { RequireAuth } from "../auth/RequireAuth";
 
 export const TaskListPage = () => {
   const [mockData, setMockData] = useState(tasks);
@@ -87,46 +88,48 @@ export const TaskListPage = () => {
   };
 
   return (
-    <MainBody>
-      <Header>TASK MANAGEMENT</Header>
-      <Container>
-        {Object.values(categories).map((category) => (
-          <TaskColumn>
-            <h3>{category.name}</h3>
-            <TaskWrapper>
-              {getTasksByCategory(category.id).map((task) => (
-                <TaskCard
-                  taskDetail={task}
-                  onClick={() => handleClickOpen(task)}
-                  onAction={(action) => onUpdateOrDeleteTask(action, task)}
-                />
-              ))}
-            </TaskWrapper>
-            <AddButton onClick={() => handleCreateNewTask(category.id)}>
-              <AddIcon fontSize="medium" />
-            </AddButton>
-          </TaskColumn>
-        ))}
-      </Container>
-      <TaskDetailDialog
-        open={isOpenTaskDetails}
-        taskDetails={selectedTask}
-        onClose={handleClose}
-      ></TaskDetailDialog>
-      <CreateTaskModal
-        open={isOpenNewTaskModal}
-        onClose={handleCreateNewTaskClose}
-        onSubmitForm={handleSubmitCreateNewTaskForm}
-        taskDetail={selectedTask}
-        selectedCategory={selectedCategory}
-      ></CreateTaskModal>
-      <DeleteTaskConfirmModal
-        open={isOpenDeleteTaskConfirmModal}
-        onClose={handleCloseDeleteTaskModal}
-        onDelete={() => handleDeleteTask(selectedTask?.id)}
-        taskDetail={selectedTask}
-      ></DeleteTaskConfirmModal>
-    </MainBody>
+    <RequireAuth>
+      <MainBody>
+        <Header>TASK MANAGEMENT</Header>
+        <Container>
+          {Object.values(categories).map((category) => (
+            <TaskColumn>
+              <h3>{category.name}</h3>
+              <TaskWrapper>
+                {getTasksByCategory(category.id).map((task) => (
+                  <TaskCard
+                    taskDetail={task}
+                    onClick={() => handleClickOpen(task)}
+                    onAction={(action) => onUpdateOrDeleteTask(action, task)}
+                  />
+                ))}
+              </TaskWrapper>
+              <AddButton onClick={() => handleCreateNewTask(category.id)}>
+                <AddIcon fontSize="medium" />
+              </AddButton>
+            </TaskColumn>
+          ))}
+        </Container>
+        <TaskDetailDialog
+          open={isOpenTaskDetails}
+          taskDetails={selectedTask}
+          onClose={handleClose}
+        ></TaskDetailDialog>
+        <CreateTaskModal
+          open={isOpenNewTaskModal}
+          onClose={handleCreateNewTaskClose}
+          onSubmitForm={handleSubmitCreateNewTaskForm}
+          taskDetail={selectedTask}
+          selectedCategory={selectedCategory}
+        ></CreateTaskModal>
+        <DeleteTaskConfirmModal
+          open={isOpenDeleteTaskConfirmModal}
+          onClose={handleCloseDeleteTaskModal}
+          onDelete={() => handleDeleteTask(selectedTask?.id)}
+          taskDetail={selectedTask}
+        ></DeleteTaskConfirmModal>
+      </MainBody>
+    </RequireAuth>
   );
 };
 
