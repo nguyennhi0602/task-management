@@ -10,9 +10,10 @@ import { CreateTaskModal } from "./CreateTaskModal";
 import moment from "moment";
 import { DeleteTaskConfirmModal } from "./DeleteTaskConfirmModal";
 import { RequireAuth } from "../auth/RequireAuth";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 export const TaskListPage = () => {
-  const [mockData, setMockData] = useState(tasks);
+  const [mockData, setMockData] = useState<Task[]>(tasks);
   const [isOpenTaskDetails, setOpenTaskDetails] = useState(false);
   const [isOpenNewTaskModal, setOpenNewTaskModal] = useState(false);
   const [isOpenDeleteTaskConfirmModal, setOpenDeleteTaskConfirmModal] =
@@ -75,7 +76,7 @@ export const TaskListPage = () => {
     }
   };
 
-  const handleDeleteTask = (id: number | undefined) => {
+  const handleDeleteTask = (id: string | undefined) => {
     const newMockData = mockData.filter((data) => data.id !== id);
     setMockData(newMockData);
     setOpenDeleteTaskConfirmModal(false);
@@ -87,29 +88,88 @@ export const TaskListPage = () => {
     setSelectedTask(undefined);
   };
 
+  const onDragEnd = (result: any) => {
+    if (!result.destination) return;
+
+    const { source, destination } = result;
+    const sourceTasks = getTasksByCategory(Number(source.droppableId));
+    let [movedTask] = sourceTasks.splice(source.index, 1);
+    let newTasks = [] as Task[];
+    if (source.droppableId === destination.droppableId) {
+      sourceTasks.splice(destination.index, 0, movedTask);
+      categories.map((category) =>
+        category.id === Number(source.droppableId)
+          ? (newTasks = newTasks.concat(sourceTasks))
+          : (newTasks = newTasks.concat(getTasksByCategory(category.id)))
+      );
+    } else {
+      const destinationTasks = getTasksByCategory(
+        Number(destination.droppableId)
+      );
+      movedTask = { ...movedTask, category: Number(destination.droppableId) };
+      destinationTasks.splice(destination.index, 0, movedTask);
+      categories.map((category) => {
+        if (category.id === Number(source.droppableId)) {
+          newTasks = newTasks.concat(sourceTasks);
+        } else if (category.id === Number(destination.droppableId)) {
+          newTasks = newTasks.concat(destinationTasks);
+        } else {
+          newTasks = newTasks.concat(getTasksByCategory(category.id));
+        }
+      });
+    }
+    setMockData(newTasks);
+  };
+
   return (
     <RequireAuth>
       <MainBody>
         <Header>TASK MANAGEMENT</Header>
-        <Container>
-          {Object.values(categories).map((category) => (
-            <TaskColumn>
-              <h3>{category.name}</h3>
-              <TaskWrapper>
-                {getTasksByCategory(category.id).map((task) => (
-                  <TaskCard
-                    taskDetail={task}
-                    onClick={() => handleClickOpen(task)}
-                    onAction={(action) => onUpdateOrDeleteTask(action, task)}
-                  />
-                ))}
-              </TaskWrapper>
-              <AddButton onClick={() => handleCreateNewTask(category.id)}>
-                <AddIcon fontSize="medium" />
-              </AddButton>
-            </TaskColumn>
-          ))}
-        </Container>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Container>
+            {Object.values(categories).map((category) => (
+              <Droppable key={category.id} droppableId={`${category.id}`}>
+                {(provided) => (
+                  <TaskColumn
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                  >
+                    <h3>{category.name}</h3>
+                    <TaskWrapper>
+                      {getTasksByCategory(category.id).map((task, index) => (
+                        <Draggable
+                          key={task.id.toString()}
+                          draggableId={task.id.toString()}
+                          index={index}
+                        >
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <TaskCard
+                                taskDetail={task}
+                                onClick={() => handleClickOpen(task)}
+                                onAction={(action) =>
+                                  onUpdateOrDeleteTask(action, task)
+                                }
+                              />
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                    </TaskWrapper>
+                    <AddButton onClick={() => handleCreateNewTask(category.id)}>
+                      <AddIcon fontSize="medium" />
+                    </AddButton>
+                    {provided.placeholder}
+                  </TaskColumn>
+                )}
+              </Droppable>
+            ))}
+          </Container>
+        </DragDropContext>
         <TaskDetailDialog
           open={isOpenTaskDetails}
           taskDetails={selectedTask}

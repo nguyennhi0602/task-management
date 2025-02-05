@@ -37,7 +37,7 @@ export const CreateTaskModal = (props: CreateTaskModalProps) => {
   const [formData, setFormData] = useState(initialData);
 
   useEffect(() => {
-    if (!!taskDetail && taskDetail.id !== 0) {
+    if (!!taskDetail && taskDetail.id !== "0") {
       setFormData({ ...taskDetail });
     } else {
       setFormData(initialData);
