@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TaskCard } from "./TaskCard";
 import { MainBody } from "../layout/MainBody";
 import styled from "styled-components";
@@ -11,6 +11,7 @@ import moment from "moment";
 import { DeleteTaskConfirmModal } from "./DeleteTaskConfirmModal";
 import { RequireAuth } from "../auth/RequireAuth";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import { Notification } from "../notification/Notification";
 
 export const TaskListPage = () => {
   const [mockData, setMockData] = useState<Task[]>(tasks);
@@ -20,6 +21,8 @@ export const TaskListPage = () => {
     useState(false);
   const [selectedTask, setSelectedTask] = useState<Task | undefined>(undefined);
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
+  const [notification, setNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
 
   const getTasksByCategory = (categoryId: number) => {
     return mockData.filter((task) => task.category === categoryId);
@@ -63,6 +66,7 @@ export const TaskListPage = () => {
     setMockData(newMockData);
     setOpenNewTaskModal(false);
     setSelectedTask(undefined);
+    scheduleNotification(task);
   };
 
   const onUpdateOrDeleteTask = (action: string, task: Task) => {
@@ -121,9 +125,38 @@ export const TaskListPage = () => {
     setMockData(newTasks);
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = moment();
+      const dueTasks = mockData.filter(
+        (task) => task.deadlineAt === now.format("YYYY-MM-DD")
+      );
+      if (now.format("hh:mm") === "11:00") {
+        dueTasks.filter(scheduleNotification);
+      }
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const scheduleNotification = (task: Task) => {
+    if (!task.deadlineAt) return;
+
+    setTimeout(() => {
+      setNotification(true);
+      setNotificationMessage(`Task ${task.name} is due today`);
+    }, 3000);
+  };
+
   return (
     <RequireAuth>
       <MainBody>
+        <Notification
+          open={notification}
+          message={notificationMessage}
+          severity={"warning"}
+          onClose={() => setNotification(false)}
+        />
         <Header>TASK MANAGEMENT</Header>
         <DragDropContext onDragEnd={onDragEnd}>
           <Container>

@@ -22,7 +22,6 @@ export const MainBody = (props: MainBodyProps) => {
       {children}
       <ButtonWrapper
         variant="contained"
-        // color="secondary"
         onClick={handleLogout}
         sx={{ mt: 2 }}
         startIcon={<LogoutIcon />}

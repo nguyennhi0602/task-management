@@ -15,7 +15,6 @@ import { useEffect, useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { MenuItem, Select } from "@mui/material";
 import { categories } from "../../db.json";
-import moment from "moment";
 
 export type CreateTaskModalProps = {
   taskDetail: Task | undefined;
@@ -83,8 +82,6 @@ export const CreateTaskModal = (props: CreateTaskModalProps) => {
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
-    console.log("value");
-    console.log(event.target);
     setFormData({
       ...formData,
       [name]: value,
