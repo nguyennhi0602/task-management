@@ -1,42 +1,37 @@
-import { PropsWithChildren } from "react";
-import { BaseProps } from "../../components/BaseProps";
-import styled from "styled-components";
-import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import LogoutIcon from "@mui/icons-material/Logout";
+import LogoutIcon from "@mui/icons-material/Logout"
+import { Button } from "@mui/material"
+import { PropsWithChildren } from "react"
+import { useNavigate } from "react-router-dom"
+import styled from "styled-components"
+import { BaseProps } from "../../components/BaseProps"
 
-export type MainBodyProps = PropsWithChildren<BaseProps>;
+export type MainBodyProps = PropsWithChildren<BaseProps>
 
 export const MainBody = (props: MainBodyProps) => {
-  const { children, className } = props;
-  const navigate = useNavigate();
+  const { children, className } = props
+  const navigate = useNavigate()
 
   const handleLogout = () => {
-    localStorage.removeItem("email");
+    localStorage.removeItem("email")
 
-    navigate("/login");
-  };
+    navigate("/login")
+  }
 
   return (
     <BodyWrapper className={className}>
       {children}
-      <ButtonWrapper
-        variant="contained"
-        onClick={handleLogout}
-        sx={{ mt: 2 }}
-        startIcon={<LogoutIcon />}
-      >
+      <ButtonWrapper variant="contained" onClick={handleLogout} sx={{ mt: 2 }} startIcon={<LogoutIcon />}>
         Logout
       </ButtonWrapper>
     </BodyWrapper>
-  );
-};
+  )
+}
 
 const BodyWrapper = styled.div`
   padding: 32px 42px;
-`;
+`
 
 const ButtonWrapper = styled(Button)`
   float: right;
   background-color: gray;
-`;
+`

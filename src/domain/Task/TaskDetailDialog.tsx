@@ -1,35 +1,36 @@
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import { Task } from "./Task";
-import styled from "styled-components";
-import Chip from "@mui/material/Chip";
-import { categories } from "../../db.json";
+import CloseIcon from "@mui/icons-material/Close"
+import Button from "@mui/material/Button"
+import Chip from "@mui/material/Chip"
+import Dialog from "@mui/material/Dialog"
+import DialogActions from "@mui/material/DialogActions"
+import DialogContent from "@mui/material/DialogContent"
+import DialogTitle from "@mui/material/DialogTitle"
+import IconButton from "@mui/material/IconButton"
+import styled from "styled-components"
+import { categories } from "../../db.json"
+import data from "../../db.json"
+import { Task } from "./Task"
 
 export type TaskDetailDialogProps = {
-  open: boolean;
-  taskDetails: Task | undefined;
-  onClose: () => void;
-};
+  open: boolean
+  taskDetails: Task | undefined
+  onClose: () => void
+}
 
 const getCategoryNameById = (id: number): string => {
-  return categories.find((c) => c.id == id)?.name || "";
-};
+  return categories.find((c) => c.id == id)?.name || ""
+}
 
 export const TaskDetailDialog = (props: TaskDetailDialogProps) => {
-  const { open, taskDetails, onClose } = props;
+  const { open, taskDetails, onClose } = props
+
+  const findAssignee = (id: string | undefined) => {
+    const assignee = data.users.find((user) => user.id === id)
+    return assignee ? `${assignee.firstName} ${assignee.lastName}` : ""
+  }
 
   return (
-    <Dialog
-      onClose={onClose}
-      aria-labelledby="customized-dialog-title"
-      open={open}
-      fullWidth={true}
-    >
+    <Dialog onClose={onClose} aria-labelledby="customized-dialog-title" open={open} fullWidth={true}>
       <DialogTitle sx={{ m: 0, p: 2 }} color="#1976d2">
         {taskDetails?.name}
       </DialogTitle>
@@ -46,19 +47,14 @@ export const TaskDetailDialog = (props: TaskDetailDialogProps) => {
         <CloseIcon />
       </IconButton>
       <DialogContent dividers>
-        {taskDetails && (
-          <ChipWrapper
-            label={getCategoryNameById(taskDetails.category)}
-            color="primary"
-          />
-        )}
+        {taskDetails && <ChipWrapper label={getCategoryNameById(taskDetails.category)} color="primary" />}
         <Description>
           <h4>Description: </h4>
           <p>{taskDetails?.description}</p>
         </Description>
         <AssignWrapper>
           <h4>Assign to: </h4>
-          <p>{taskDetails?.assignee}</p>
+          <p>{findAssignee(taskDetails?.assignee)}</p>
         </AssignWrapper>
         <DeadlineWrapper>
           <h4>Deadline at: </h4>
@@ -69,12 +65,12 @@ export const TaskDetailDialog = (props: TaskDetailDialogProps) => {
         <Button onClick={onClose}>Close</Button>
       </DialogActions>
     </Dialog>
-  );
-};
+  )
+}
 
 const ChipWrapper = styled(Chip)`
   float: right;
-`;
+`
 
 const Description = styled.div`
   margin: 0;
@@ -93,12 +89,12 @@ const Description = styled.div`
     font-size: 1.2em;
     margin: 0px 0px 0px 40px;
   }
-`;
+`
 
 const DeadlineWrapper = styled.div`
   display: flex;
   align-items: center;
-`;
+`
 
 const DeadlineAtWrapper = styled.div<{ $isExpired?: boolean }>`
   max-width: 50%;
@@ -108,7 +104,7 @@ const DeadlineAtWrapper = styled.div<{ $isExpired?: boolean }>`
   border-radius: 2px;
   height: 50%;
   margin-left: 6px;
-`;
+`
 
 const AssignWrapper = styled.div`
   display: flex;
@@ -116,4 +112,4 @@ const AssignWrapper = styled.div`
   p {
     margin-left: 6px;
   }
-`;
+`

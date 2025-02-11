@@ -3,13 +3,57 @@
     "username": "admin@openwt.com",
     "password": "123456"
   },
+  "users": [
+    {
+      "id": "1",
+      "username": "admin@openwt.com",
+      "password": "123456",
+      "firstName": "Admin",
+      "lastName": "Nguyen"
+    },
+    {
+      "id": "2",
+      "username": "user1@openwt.com",
+      "password": "123456",
+      "firstName": "User1",
+      "lastName": "Nguyen"
+    },
+    {
+      "id": "3",
+      "username": "user2@openwt.com",
+      "password": "123456",
+      "firstName": "User2",
+      "lastName": "Nguyen"
+    },
+    {
+      "id": "4",
+      "username": "user3@openwt.com",
+      "password": "123456",
+      "firstName": "User3",
+      "lastName": "Nguyen"
+    },
+    {
+      "id": "5",
+      "username": "user4@openwt.com",
+      "password": "123456",
+      "firstName": "User4",
+      "lastName": "Nguyen"
+    },
+    {
+      "id": "6",
+      "username": "user5@openwt.com",
+      "password": "123456",
+      "firstName": "User5",
+      "lastName": "Nguyen"
+    }
+  ],
   "tasks": [
     {
       "id": "1",
       "name": "Hover tooltips",
       "description": "Implement Hover Tooltip for Avatar",
       "deadlineAt": "2025-09-09",
-      "assignee": "John Smith",
+      "assignee": "1",
       "category": 1
     },
     {
@@ -17,7 +61,7 @@
       "name": "Build project",
       "description": "Build project structure",
       "deadlineAt": "2023-09-09",
-      "assignee": "Annabel",
+      "assignee": "2",
       "category": 2
     },
     {
@@ -25,7 +69,7 @@
       "name": "Display tasks",
       "description": "Display list of tasks",
       "deadlineAt": "2025-09-09",
-      "assignee": "Daniel",
+      "assignee": "3",
       "category": 3
     },
     {
@@ -33,7 +77,7 @@
       "name": "Display task details",
       "description": "Display task details",
       "deadlineAt": "2023-09-09",
-      "assignee": "John Smith",
+      "assignee": "4",
       "category": 1
     },
     {
@@ -41,7 +85,7 @@
       "name": "Create new task",
       "description": "Add new task",
       "deadlineAt": "2023-09-09",
-      "assignee": "Daniel",
+      "assignee": "4",
       "category": 1
     },
     {
@@ -49,7 +93,7 @@
       "name": "Update task",
       "description": "Update task",
       "deadlineAt": "2023-09-09",
-      "assignee": "John Smith",
+      "assignee": "5",
       "category": 1
     },
     {
@@ -57,7 +101,7 @@
       "name": "Remove task",
       "description": "Remove task",
       "deadlineAt": "2025-09-09",
-      "assignee": "John Smith",
+      "assignee": "6",
       "category": 1
     },
     {
@@ -65,7 +109,7 @@
       "name": "Improve",
       "description": "Remove task",
       "deadlineAt": "2025-02-07",
-      "assignee": "John Smith",
+      "assignee": "1",
       "category": 1
     },
     {
@@ -73,7 +117,7 @@
       "name": "UI Improvements",
       "description": "UI improvements",
       "deadlineAt": "2025-09-09",
-      "assignee": "John Smith",
+      "assignee": "2",
       "category": 4
     }
   ],

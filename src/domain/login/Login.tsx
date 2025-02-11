@@ -1,35 +1,30 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import {
-  Box,
-  Button,
-  TextField,
-  Typography,
-  Container,
-  Alert,
-} from "@mui/material";
-import data from "../../db.json";
+import { Alert, Box, Button, Container, TextField, Typography } from "@mui/material"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import data from "../../db.json"
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
+  const navigate = useNavigate()
+
+  const isValidUser = data.users.filter((user) => user.username === email && user.password === password).length > 0
 
   const handleLogin = async (e: any) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
-      if (email == data.user.username && password == data.user.password) {
-        localStorage.setItem("email", email);
-        navigate("/tasks");
+      if (isValidUser) {
+        localStorage.setItem("email", email)
+        navigate("/tasks")
       } else {
-        setError("An error occurred while logging in.");
+        setError("An error occurred while logging in.")
       }
-    } catch (err) {
-      setError("An error occurred while logging in.");
+    } catch {
+      setError("An error occurred while logging in.")
     }
-  };
+  }
 
   return (
     <Container maxWidth="sm">
@@ -52,11 +47,7 @@ export const Login = () => {
             {error}
           </Alert>
         )}
-        <Box
-          component="form"
-          onSubmit={handleLogin}
-          sx={{ mt: 1, width: "100%" }}
-        >
+        <Box component="form" onSubmit={handleLogin} sx={{ mt: 1, width: "100%" }}>
           <TextField
             margin="normal"
             required
@@ -81,16 +72,11 @@ export const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Login
           </Button>
         </Box>
       </Box>
     </Container>
-  );
-};
+  )
+}

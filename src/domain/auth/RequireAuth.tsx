@@ -1,12 +1,12 @@
-import { PropsWithChildren } from "react";
-import { createSearchParams, Navigate, useLocation } from "react-router-dom";
+import { PropsWithChildren } from "react"
+import { createSearchParams, Navigate, useLocation } from "react-router-dom"
 
-export type RequireAuthProps = PropsWithChildren;
+export type RequireAuthProps = PropsWithChildren
 
 export const RequireAuth = (props: RequireAuthProps) => {
-  const { children } = props;
+  const { children } = props
 
-  const location = useLocation();
+  const location = useLocation()
 
   if (!localStorage.getItem("email")) {
     return (
@@ -15,8 +15,8 @@ export const RequireAuth = (props: RequireAuthProps) => {
           from: location.pathname,
         }).toString()}`}
       />
-    );
+    )
   }
 
-  return children;
-};
+  return children
+}

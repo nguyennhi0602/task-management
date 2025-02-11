@@ -1,15 +1,15 @@
-import Snackbar from "@mui/material/Snackbar";
-import { Alert } from "@mui/material";
+import { Alert } from "@mui/material"
+import Snackbar from "@mui/material/Snackbar"
 
 export type NotificationProps = {
-  open: boolean;
-  message: string;
-  severity?: "success" | "info" | "warning" | "error";
-  onClose: () => void;
-};
+  open: boolean
+  message: string
+  severity?: "success" | "info" | "warning" | "error"
+  onClose: () => void
+}
 
 export const Notification = (props: NotificationProps) => {
-  const { open, message, severity = "info", onClose } = props;
+  const { open, message, severity = "info", onClose } = props
 
   return (
     <Snackbar
@@ -22,5 +22,5 @@ export const Notification = (props: NotificationProps) => {
         {message}
       </Alert>
     </Snackbar>
-  );
-};
+  )
+}

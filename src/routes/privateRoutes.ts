@@ -1,4 +1,4 @@
-import { RouteObject, redirect } from "react-router-dom";
+import { redirect, RouteObject } from "react-router-dom"
 
 export const privateRoutes: RouteObject[] = [
   {
@@ -10,7 +10,7 @@ export const privateRoutes: RouteObject[] = [
     shouldRevalidate: () => false,
     action: async () => {
       // await profileApiClient.logout();
-      return redirect("login");
+      return redirect("login")
     },
     children: [
       {
@@ -29,4 +29,4 @@ export const privateRoutes: RouteObject[] = [
       // },
     ],
   },
-];
+]

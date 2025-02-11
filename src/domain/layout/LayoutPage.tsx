@@ -1,13 +1,13 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom"
 
 export const LayoutPage = () => {
-  return <LayoutPageInternal />;
-};
+  return <LayoutPageInternal />
+}
 
 const LayoutPageInternal = () => {
-  const isLoading = false;
+  const isLoading = false
 
-  if (isLoading) return <>LOADING LayoutPage...</>;
+  if (isLoading) return <>LOADING LayoutPage...</>
 
-  return <Outlet />;
-};
+  return <Outlet />
+}

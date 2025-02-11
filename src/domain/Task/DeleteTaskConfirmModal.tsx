@@ -1,29 +1,24 @@
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import { Task } from "./Task";
+import CloseIcon from "@mui/icons-material/Close"
+import Button from "@mui/material/Button"
+import Dialog from "@mui/material/Dialog"
+import DialogActions from "@mui/material/DialogActions"
+import DialogContent from "@mui/material/DialogContent"
+import DialogTitle from "@mui/material/DialogTitle"
+import IconButton from "@mui/material/IconButton"
+import { Task } from "./Task"
 
 export type DeleteTaskConfirmModalProps = {
-  taskDetail: Task | undefined;
-  open: boolean;
-  onClose: () => void;
-  onDelete: (data: any) => void;
-};
+  taskDetail: Task | undefined
+  open: boolean
+  onClose: () => void
+  onDelete: (data: any) => void
+}
 
 export const DeleteTaskConfirmModal = (props: DeleteTaskConfirmModalProps) => {
-  const { taskDetail, open, onClose, onDelete } = props;
+  const { taskDetail, open, onClose, onDelete } = props
 
   return (
-    <Dialog
-      onClose={onClose}
-      aria-labelledby="customized-dialog-title"
-      open={open}
-      fullWidth={true}
-    >
+    <Dialog onClose={onClose} aria-labelledby="customized-dialog-title" open={open} fullWidth={true}>
       <DialogTitle sx={{ m: 0, p: 2 }} color="error">
         Delete task
       </DialogTitle>
@@ -56,5 +51,5 @@ export const DeleteTaskConfirmModal = (props: DeleteTaskConfirmModalProps) => {
         </Button>
       </DialogActions>
     </Dialog>
-  );
-};
+  )
+}
