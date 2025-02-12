@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton"
 import styled from "styled-components"
 import { categories } from "../../db.json"
 import data from "../../db.json"
+import { TaskComment } from "../comment/TaskComment"
 import { Task } from "./Task"
 
 export type TaskDetailDialogProps = {
@@ -28,6 +29,8 @@ export const TaskDetailDialog = (props: TaskDetailDialogProps) => {
     const assignee = data.users.find((user) => user.id === id)
     return assignee ? `${assignee.firstName} ${assignee.lastName}` : ""
   }
+
+  const currentUserId = data.users.find((user) => user.username === localStorage.getItem("email"))?.id ?? ""
 
   return (
     <Dialog onClose={onClose} aria-labelledby="customized-dialog-title" open={open} fullWidth={true}>
@@ -60,6 +63,9 @@ export const TaskDetailDialog = (props: TaskDetailDialogProps) => {
           <h4>Deadline at: </h4>
           <DeadlineAtWrapper>{taskDetails?.deadlineAt}</DeadlineAtWrapper>
         </DeadlineWrapper>
+        <hr />
+        <br />
+        <TaskComment comments={taskDetails?.comments ?? []} taskId={taskDetails?.id ?? ""} userId={currentUserId} />
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Close</Button>

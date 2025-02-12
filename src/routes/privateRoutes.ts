@@ -9,7 +9,6 @@ export const privateRoutes: RouteObject[] = [
     }),
     shouldRevalidate: () => false,
     action: async () => {
-      // await profileApiClient.logout();
       return redirect("login")
     },
     children: [
@@ -20,13 +19,6 @@ export const privateRoutes: RouteObject[] = [
           Component: (await import("../domain/Task/TaskListPage")).TaskListPage,
         }),
       },
-      // {
-      //   id: "login",
-      //   path: "login",
-      //   lazy: async () => ({
-      //     Component: (await import("../domain/login/LoginPage")).LoginPage,
-      //   }),
-      // },
     ],
   },
 ]

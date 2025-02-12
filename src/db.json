@@ -1,8 +1,4 @@
 {
-  "user": {
-    "username": "admin@openwt.com",
-    "password": "123456"
-  },
   "users": [
     {
       "id": "1",
@@ -54,7 +50,8 @@
       "description": "Implement Hover Tooltip for Avatar",
       "deadlineAt": "2025-09-09",
       "assignee": "1",
-      "category": 1
+      "category": 1,
+      "comments": []
     },
     {
       "id": "2",
@@ -62,7 +59,8 @@
       "description": "Build project structure",
       "deadlineAt": "2023-09-09",
       "assignee": "2",
-      "category": 2
+      "category": 2,
+      "comments": []
     },
     {
       "id": "3",
@@ -70,6 +68,7 @@
       "description": "Display list of tasks",
       "deadlineAt": "2025-09-09",
       "assignee": "3",
+      "comments": [],
       "category": 3
     },
     {
@@ -78,7 +77,8 @@
       "description": "Display task details",
       "deadlineAt": "2023-09-09",
       "assignee": "4",
-      "category": 1
+      "category": 1,
+      "comments": []
     },
     {
       "id": "5",
@@ -86,7 +86,8 @@
       "description": "Add new task",
       "deadlineAt": "2023-09-09",
       "assignee": "4",
-      "category": 1
+      "category": 1,
+      "comments": []
     },
     {
       "id": "6",
@@ -94,7 +95,8 @@
       "description": "Update task",
       "deadlineAt": "2023-09-09",
       "assignee": "5",
-      "category": 1
+      "category": 1,
+      "comments": []
     },
     {
       "id": "7",
@@ -102,7 +104,8 @@
       "description": "Remove task",
       "deadlineAt": "2025-09-09",
       "assignee": "6",
-      "category": 1
+      "category": 1,
+      "comments": []
     },
     {
       "id": "8",
@@ -110,7 +113,8 @@
       "description": "Remove task",
       "deadlineAt": "2025-02-07",
       "assignee": "1",
-      "category": 1
+      "category": 1,
+      "comments": []
     },
     {
       "id": "9",
@@ -118,7 +122,8 @@
       "description": "UI improvements",
       "deadlineAt": "2025-09-09",
       "assignee": "2",
-      "category": 4
+      "category": 4,
+      "comments": []
     }
   ],
   "categories": [

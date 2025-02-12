@@ -11,14 +11,13 @@ firebase.initializeApp({
 });
 
 const messaging = firebase.messaging();
-// Create a BroadcastChannel to communicate with the main app
-const broadcastChannel = new BroadcastChannel("notifications_channel");
 
 messaging.onBackgroundMessage((payload) => {
-  console.log("Received background message: ", payload);
-
-  self.registration.showNotification(payload.notification.title, {
+  const notificationTitle = payload.notification.title;
+  const notificationOptions = {
     body: payload.notification.body,
-    icon: "/logo192.png",
-  });
+    icon: '/firebase-logo.png', // Customize the icon as needed
+  };
+
+  self.registration.showNotification(notificationTitle, notificationOptions);
 });

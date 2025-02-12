@@ -1,29 +1,13 @@
-import firebase from "firebase/app"
 import "firebase/messaging"
-import { firebaseConfig } from "./firebaseConfig"
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig)
-} else {
-  firebase.app() // if already initialized, use that one
-}
-
-let messaging: firebase.messaging.Messaging
-
-if (typeof window !== "undefined") {
-  if (firebase.messaging.isSupported()) {
-    messaging = firebase.messaging()
-  }
-}
+import { getMessaging, getToken, onMessage } from "firebase/messaging"
+import { messaging } from "./firebaseConfig"
 
 export const getMessagingToken = async () => {
   let currentToken = ""
-  if (!messaging) return
   try {
-    currentToken = await messaging.getToken({
+    currentToken = await getToken(messaging, {
       vapidKey: "BNuAGHtCoVT7uh_IUD1Zfe4LkfDDF8xXY6eikjwFXFPEevcUI56Q0L7sWKt2-hotKnNeMEAja3cIKU0_iq9LY8I",
     })
-    console.log(currentToken)
   } catch (error) {
     console.log("An error occurred while retrieving token. ", error)
   }
@@ -32,7 +16,7 @@ export const getMessagingToken = async () => {
 
 export const onMessageListener = () =>
   new Promise((resolve) => {
-    messaging.onMessage((payload) => {
+    onMessage(messaging, (payload) => {
       resolve(payload)
     })
   })

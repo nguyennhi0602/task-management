@@ -1,3 +1,5 @@
+import { Comment } from "../comment/Comment"
+
 export type Task = {
   id: string
   name: string
@@ -5,4 +7,5 @@ export type Task = {
   deadlineAt: string
   assignee: string
   category: number
+  comments?: Comment[]
 }
