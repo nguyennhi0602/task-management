@@ -47,5 +47,6 @@ export const App = () => {
 }
 
 const OutletWrapper = styled.div`
+  background-color: red;
   display: contents;
 `

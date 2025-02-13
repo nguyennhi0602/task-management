@@ -1,9 +1,11 @@
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd"
 import AddIcon from "@mui/icons-material/Add"
+import { Card } from "@mui/material"
 import moment from "moment"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import { categories, tasks } from "../../db.json"
+import { theme } from "../../theme/useCustomTheme"
 import { RequireAuth } from "../auth/RequireAuth"
 import { MainBody } from "../layout/MainBody"
 import { Notification } from "../notification/Notification"
@@ -143,6 +145,40 @@ export const TaskListPage = () => {
     }, 3000)
   }
 
+  const Container = styled.div`
+    display: flex;
+    gap: 50px;
+    width: 100%;
+  `
+
+  const TaskColumn = styled(Card)`
+    min-width: 320px;
+    background-color: ${theme().palette.background.default} !important;
+    border-radius: 8px;
+    padding: ${theme().spacing(2)};
+    grid-template-rows: auto;
+    grid-template-columns: auto;
+    justify-content: center;
+  `
+
+  const TaskWrapper = styled.div`
+    width: 100%;
+    display: grid;
+    gap: 10px;
+    margin-top: 10px;
+  `
+
+  const AddButton = styled.div`
+    background-color: ${theme().palette.background.paper};
+    height: 80px;
+    border-radius: 6px;
+    margin-top: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `
+
   return (
     <RequireAuth>
       <MainBody>
@@ -152,7 +188,6 @@ export const TaskListPage = () => {
           severity={"warning"}
           onClose={() => setNotification(false)}
         />
-        <Header>TASK MANAGEMENT</Header>
         <DragDropContext onDragEnd={onDragEnd}>
           <Container>
             {Object.values(categories).map((category) => (
@@ -203,42 +238,3 @@ export const TaskListPage = () => {
     </RequireAuth>
   )
 }
-
-const Header = styled.h1`
-  margin-bottom: 30px;
-  font-size: 30px;
-`
-
-const Container = styled.div`
-  display: flex;
-  gap: 30px;
-  width: 100%;
-`
-
-const TaskColumn = styled.div`
-  min-width: 320px;
-  background-color: #e8e6e6;
-  border-radius: 6px;
-  padding: 8px;
-  grid-template-rows: auto;
-  grid-template-columns: auto;
-  justify-content: center;
-`
-
-const TaskWrapper = styled.div`
-  width: 100%;
-  display: grid;
-  gap: 10px;
-  margin-top: 10px;
-`
-
-const AddButton = styled.div`
-  background-color: #fff;
-  height: 80px;
-  border-radius: 6px;
-  margin-top: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`

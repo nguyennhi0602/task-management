@@ -1,7 +1,7 @@
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined"
 import EditIcon from "@mui/icons-material/Edit"
 import MoreVertIcon from "@mui/icons-material/MoreVert"
-import { Avatar, Tooltip } from "@mui/material"
+import { Avatar, Card, Tooltip } from "@mui/material"
 import IconButton from "@mui/material/IconButton"
 import ListItemIcon from "@mui/material/ListItemIcon"
 import ListItemText from "@mui/material/ListItemText"
@@ -11,6 +11,7 @@ import moment from "moment"
 import { useState } from "react"
 import styled from "styled-components"
 import data from "../../db.json"
+import { theme } from "../../theme/useCustomTheme"
 import { Task } from "./Task"
 
 export type TaskCardProp = {
@@ -112,7 +113,7 @@ export const TaskCard = (props: TaskCardProp) => {
           <Avatar
             sx={{
               bgcolor: stringToColor(findAssignee(taskDetail.assignee)),
-              color: "#fff",
+              color: theme().palette.text.primary,
               textTransform: "uppercase",
               width: 30,
               height: 30,
@@ -127,13 +128,13 @@ export const TaskCard = (props: TaskCardProp) => {
   )
 }
 
-const Wrapper = styled.div`
-  padding: 8px;
-  background-color: #fff;
-  border-radius: 6px;
-  gap: 2px;
-  cursor: pointer;
-`
+const Wrapper = styled(Card)(({}) => ({
+  padding: theme().spacing(2),
+  backgroundColor: theme().palette.background.paper,
+  borderRadius: "6px",
+  gap: "2px",
+  cursor: "pointer",
+}))
 
 const Header = styled.div`
   display: flex;

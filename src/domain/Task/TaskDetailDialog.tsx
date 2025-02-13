@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton"
 import styled from "styled-components"
 import { categories } from "../../db.json"
 import data from "../../db.json"
+import { theme } from "../../theme/useCustomTheme"
 import { TaskComment } from "../comment/TaskComment"
 import { Task } from "./Task"
 
@@ -34,7 +35,7 @@ export const TaskDetailDialog = (props: TaskDetailDialogProps) => {
 
   return (
     <Dialog onClose={onClose} aria-labelledby="customized-dialog-title" open={open} fullWidth={true}>
-      <DialogTitle sx={{ m: 0, p: 2 }} color="#1976d2">
+      <DialogTitle sx={{ m: 0, p: 2 }} color={theme().palette.text.primary}>
         {taskDetails?.name}
       </DialogTitle>
       <IconButton
@@ -68,7 +69,9 @@ export const TaskDetailDialog = (props: TaskDetailDialogProps) => {
         <TaskComment comments={taskDetails?.comments ?? []} taskId={taskDetails?.id ?? ""} userId={currentUserId} />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Close</Button>
+        <Button onClick={onClose} color="primary">
+          Close
+        </Button>
       </DialogActions>
     </Dialog>
   )

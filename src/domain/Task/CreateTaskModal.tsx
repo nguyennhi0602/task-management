@@ -15,6 +15,7 @@ import dayjs, { Dayjs } from "dayjs"
 import { useEffect, useState } from "react"
 import { categories } from "../../db.json"
 import { users } from "../../db.json"
+import { theme } from "../../theme/useCustomTheme"
 import { Task } from "./Task"
 
 export type CreateTaskModalProps = {
@@ -103,7 +104,7 @@ export const CreateTaskModal = (props: CreateTaskModalProps) => {
 
   return (
     <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} fullWidth={true}>
-      <DialogTitle sx={{ m: 0, p: 2 }} color="#1976d2">
+      <DialogTitle sx={{ m: 0, p: 2 }} color={theme().palette.text.primary}>
         New Task
       </DialogTitle>
       <IconButton
@@ -187,7 +188,9 @@ export const CreateTaskModal = (props: CreateTaskModalProps) => {
         <Button variant="contained" onClick={handleSubmit}>
           Save
         </Button>
-        <Button onClick={handleClose}>Close</Button>
+        <Button onClick={handleClose} color="primary">
+          Close
+        </Button>
       </DialogActions>
     </Dialog>
   )

@@ -1,8 +1,8 @@
 import SendIcon from "@mui/icons-material/Send"
-import { Box, Button, Divider, List, ListItem, ListItemText, Typography } from "@mui/material"
+import { Box, Button, Divider, List, ListItem, ListItemText, Typography, useTheme } from "@mui/material"
 import { formatDistanceToNow } from "date-fns"
 import { addDoc, collection, onSnapshot } from "firebase/firestore"
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import { Mention, MentionsInput } from "react-mentions"
 import data from "../../db.json"
 import { users } from "../../db.json"
@@ -20,6 +20,40 @@ export const TaskComment = (props: TaskCommentProps) => {
 
   const [currentComments, setComments] = useState(props.comments)
   const [newComment, setNewComment] = useState("")
+  const theme = useTheme()
+
+  const customStyle = {
+    width: "100%",
+    control: {
+      fontSize: 16,
+      border: `1px solid white`,
+      borderRadius: "5px",
+      backgroundColor: theme.palette.background.paper,
+    },
+    highlighter: {
+      padding: 10,
+    },
+    input: {
+      padding: 10,
+      minHeight: "50px",
+      borderRadius: "5px",
+      backgroundColor: theme.palette.background.paper,
+    },
+    suggestions: {
+      list: {
+        backgroundColor: theme.palette.background.default,
+        color: "primary",
+        borderRadius: "5px",
+        padding: "5px",
+      },
+      item: {
+        padding: "8px",
+        "&focused": {
+          backgroundColor: theme.palette.secondary.main,
+        },
+      },
+    },
+  }
 
   const findCreatorFullName = (userId: string | undefined) => {
     const user = data.users.find((u) => u.id === userId)
@@ -73,7 +107,7 @@ export const TaskComment = (props: TaskCommentProps) => {
   const highlightMentions = (text: string) => {
     return text.split(" ").map((word, index) =>
       word.startsWith("@") ? (
-        <span key={index} style={{ fontWeight: "bold", color: "#4a4c4be0" }}>
+        <span key={index} style={{ fontWeight: "bold", color: theme.palette.primary.main }}>
           {word.replace("@", "")}{" "}
         </span>
       ) : (
@@ -93,7 +127,10 @@ export const TaskComment = (props: TaskCommentProps) => {
                 <ListItemText
                   primary={
                     <Typography>
-                      <strong>{findCreatorFullName(comment.creatorId)}:</strong> {highlightMentions(comment.content)}
+                      <strong style={{ color: theme.palette.primary.main }}>
+                        {findCreatorFullName(comment.creatorId)}:
+                      </strong>{" "}
+                      {highlightMentions(comment.content)}
                     </Typography>
                   }
                   secondary={`${formatDistanceToNow(comment.createdAt, { addSuffix: true })}`}
@@ -103,7 +140,7 @@ export const TaskComment = (props: TaskCommentProps) => {
             </React.Fragment>
           ))
         ) : (
-          <Typography variant="body2" color="textSecondary">
+          <Typography variant="body2" color={theme.palette.text.secondary}>
             No comments yet.
           </Typography>
         )}
@@ -129,36 +166,4 @@ export const TaskComment = (props: TaskCommentProps) => {
       </Box>
     </>
   )
-}
-
-const customStyle = {
-  width: "100%",
-  control: {
-    fontSize: 16,
-    border: "1px solid #ddd",
-    padding: "10px",
-    borderRadius: "5px",
-    minHeight: "50px",
-  },
-  highlighter: {
-    padding: 10,
-  },
-  input: {
-    padding: 10,
-    minHeight: "50px",
-  },
-  suggestions: {
-    list: {
-      backgroundColor: "#fff3f3",
-      color: "primary",
-      borderRadius: "5px",
-      padding: "5px",
-    },
-    item: {
-      padding: "8px",
-      "&focused": {
-        backgroundColor: "#e5e5e5",
-      },
-    },
-  },
 }
