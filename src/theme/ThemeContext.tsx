@@ -14,13 +14,13 @@ const getDesignTokens = (mode: PaletteMode) => ({
     ...(mode === "dark"
       ? {
           primary: { main: "#44546F" }, // Light Blue
-          secondary: { main: "#f48fb1" }, // Pink
+          secondary: { main: "#454F59" }, // Pink
           background: { default: "#22272B", paper: "#454F59" }, // Dark BG
           text: { primary: "#ffffff", secondary: "#F1F2F4" }, // White text
         }
       : {
           primary: { main: "#9FADBC" }, // Blue
-          secondary: { main: "#d32f2f" }, // Red
+          secondary: { main: "#FFFFFF" }, // Red
           background: { default: "#F1F2F4", paper: "#FFFFFF" }, // Light BG
           text: { primary: "#000000", secondary: "#9FADBC" }, // Black text
         }),
