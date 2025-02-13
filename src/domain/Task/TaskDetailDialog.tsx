@@ -45,7 +45,7 @@ export const TaskDetailDialog = (props: TaskDetailDialogProps) => {
           position: "absolute",
           right: 8,
           top: 8,
-          color: theme.palette.grey[500],
+          color: theme.palette.text.primary,
         })}
       >
         <CloseIcon />
@@ -69,7 +69,12 @@ export const TaskDetailDialog = (props: TaskDetailDialogProps) => {
         <TaskComment comments={taskDetails?.comments ?? []} taskId={taskDetails?.id ?? ""} userId={currentUserId} />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="primary">
+        <Button
+          onClick={onClose}
+          sx={{
+            color: theme().palette.text.primary,
+          }}
+        >
           Close
         </Button>
       </DialogActions>

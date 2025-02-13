@@ -114,7 +114,7 @@ export const CreateTaskModal = (props: CreateTaskModalProps) => {
           position: "absolute",
           right: 8,
           top: 8,
-          color: theme.palette.grey[500],
+          color: theme.palette.text.primary,
         })}
       >
         <CloseIcon />
@@ -188,7 +188,12 @@ export const CreateTaskModal = (props: CreateTaskModalProps) => {
         <Button variant="contained" onClick={handleSubmit}>
           Save
         </Button>
-        <Button onClick={handleClose} color="primary">
+        <Button
+          onClick={handleClose}
+          sx={{
+            color: theme().palette.text.primary,
+          }}
+        >
           Close
         </Button>
       </DialogActions>

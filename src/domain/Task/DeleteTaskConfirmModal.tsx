@@ -30,7 +30,7 @@ export const DeleteTaskConfirmModal = (props: DeleteTaskConfirmModalProps) => {
           position: "absolute",
           right: 8,
           top: 8,
-          color: theme.palette.grey[500],
+          color: theme.palette.text.primary,
         })}
       >
         <CloseIcon />
