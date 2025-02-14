@@ -63,8 +63,6 @@ export const TaskComment = (props: TaskCommentProps) => {
   useEffect(() => {
     if (taskId) {
       const unsubscribe = onSnapshot(collection(db, "tasks", taskId, "comments"), (snapshot) => {
-        console.log("snapshot.docs")
-        snapshot.docs.map((doc) => console.log(doc.data()))
         setComments(
           snapshot.docs.map(
             (doc) =>
