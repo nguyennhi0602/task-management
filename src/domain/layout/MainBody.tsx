@@ -39,7 +39,7 @@ export const MainBody = (props: MainBodyProps) => {
     padding: 32px 42px;
     display: inline-block;
     background-color: ${theme().palette.background.paper};
-    width: 100%;
+    min-height: 100vh;
   `
 
   const ButtonWrapper = styled(Button)`

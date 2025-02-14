@@ -2,6 +2,7 @@ import { Alert, Box, Button, Container, TextField, Typography } from "@mui/mater
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import data from "../../db.json"
+import { theme } from "../../theme/useCustomTheme"
 
 export const Login = () => {
   const [email, setEmail] = useState("")
@@ -37,6 +38,7 @@ export const Login = () => {
           boxShadow: 3,
           padding: 4,
           borderRadius: 2,
+          background: theme().palette.background.paper,
         }}
       >
         <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
@@ -59,6 +61,7 @@ export const Login = () => {
             autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            sx={{ borderColor: "black" }}
           />
           <TextField
             margin="normal"

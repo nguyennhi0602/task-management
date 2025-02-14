@@ -2,6 +2,19 @@ import { CssBaseline, PaletteMode } from "@mui/material"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import React, { createContext, useContext, useMemo, useState } from "react"
 
+export type ThemeContextType = {
+  mode: "light" | "dark"
+  primaryColor: string
+  secondaryColor: string
+  backgroundColor: string
+  fontFamily: string
+  setMode: (mode: "light" | "dark") => void
+  setPrimaryColor: (color: string) => void
+  setSecondaryColor: (color: string) => void
+  setBackgroundColor: (color: string) => void
+  setFontFamily: (font: string) => void
+}
+
 // Context for Theme Mode
 const ThemeContext = createContext({
   toggleTheme: () => {},
@@ -13,15 +26,15 @@ const getDesignTokens = (mode: PaletteMode) => ({
     mode,
     ...(mode === "dark"
       ? {
-          primary: { main: "#44546F" }, // Light Blue
-          secondary: { main: "#454F59" }, // Pink
-          background: { default: "#22272B", paper: "#454F59" }, // Dark BG
-          text: { primary: "#ffffff", secondary: "#F1F2F4" }, // White text
+          primary: { main: "#DEE4EA" },
+          secondary: { main: "#454F59" },
+          background: { default: "#22272B", paper: "#454F59" },
+          text: { primary: "#ffffff", secondary: "#F1F2F4" },
         }
       : {
-          primary: { main: "#9FADBC" }, // Blue
+          primary: { main: "#091E42" }, // Blue
           secondary: { main: "#FFFFFF" }, // Red
-          background: { default: "#F1F2F4", paper: "#FFFFFF" }, // Light BG
+          background: { default: "#F1F2F4", paper: "#FFFFFF" },
           text: { primary: "#000000", secondary: "#9FADBC" }, // Black text
         }),
   },
