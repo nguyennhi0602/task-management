@@ -2,18 +2,19 @@ import Brightness4Icon from "@mui/icons-material/Brightness4"
 import Brightness7Icon from "@mui/icons-material/Brightness7"
 import LogoutIcon from "@mui/icons-material/Logout"
 import { Button } from "@mui/material"
-import { PropsWithChildren } from "react"
+import { PropsWithChildren, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import { BaseProps } from "../../components/BaseProps"
-import { useThemeContext } from "../../theme/ThemeContext"
+import { ThemeCustomize } from "../../theme/ThemeCustomize"
+import { ThemeProvider } from "../../theme/ThemeProvider"
 import { theme } from "../../theme/useCustomTheme"
 
 export type MainBodyProps = PropsWithChildren<BaseProps>
 
 export const MainBody = (props: MainBodyProps) => {
   const { children } = props
-  const { toggleTheme, mode } = useThemeContext()
+  const [openTheme, setOpenTheme] = useState(false)
 
   const navigate = useNavigate()
 
@@ -49,16 +50,10 @@ export const MainBody = (props: MainBodyProps) => {
 
   return (
     <BodyWrapper>
+      <ThemeCustomize open={openTheme} onClose={() => setOpenTheme(false)}></ThemeCustomize>
       <HeaderWrapper>
         <Header>TASK MANAGEMENT</Header>
-        <Button
-          onClick={toggleTheme}
-          variant="contained"
-          sx={{ mt: 2 }}
-          startIcon={mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-        >
-          {mode === "dark" ? "Light Mode" : "Dark Mode"}
-        </Button>
+        <ThemeProvider onThemeCustomize={() => setOpenTheme(!openTheme)}></ThemeProvider>
       </HeaderWrapper>
       {children}
       <ButtonWrapper variant="contained" onClick={handleLogout} sx={{ mt: 2 }} startIcon={<LogoutIcon />}>

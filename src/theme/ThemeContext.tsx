@@ -19,41 +19,111 @@ export type ThemeContextType = {
 const ThemeContext = createContext({
   toggleTheme: () => {},
   mode: "light" as PaletteMode,
-})
-
-const getDesignTokens = (mode: PaletteMode) => ({
-  palette: {
-    mode,
-    ...(mode === "dark"
-      ? {
-          primary: { main: "#DEE4EA" },
-          secondary: { main: "#454F59" },
-          background: { default: "#22272B", paper: "#454F59" },
-          text: { primary: "#ffffff", secondary: "#F1F2F4" },
-        }
-      : {
-          primary: { main: "#091E42" }, // Blue
-          secondary: { main: "#FFFFFF" }, // Red
-          background: { default: "#F1F2F4", paper: "#FFFFFF" },
-          text: { primary: "#000000", secondary: "#9FADBC" }, // Black text
-        }),
-  },
+  primaryColor: "",
+  secondaryColor: "",
+  backgroundColor: "",
+  backgroundPaperColor: "",
+  fontFamily: "",
+  setPrimaryColor: (color: string) => {},
+  setSecondaryColor: (color: string) => {},
+  setBackgroundColor: (color: string) => {},
+  setBackgroundPaperColor: (color: string) => {},
+  setFontFamily: (font: string) => {},
 })
 
 // Theme Provider Component
 export const ThemeProviderWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [mode, setMode] = useState<PaletteMode>("light")
+  const [primaryColor, setPrimaryColor] = useState(localStorage.getItem("primaryColor") || "#091E42")
+  const [secondaryColor, setSecondaryColor] = useState(localStorage.getItem("secondaryColor") || "#FFFFFF")
+  const [backgroundColor, setBackgroundColor] = useState(localStorage.getItem("backgroundColor") || "#F1F2F4")
+  const [backgroundPaperColor, setBackgroundPaperColor] = useState(
+    localStorage.getItem("backgroundPaperColor") || "#FFFFFF"
+  )
+  const [fontFamily, setFontFamily] = useState(localStorage.getItem("fontFamily") || "Arial")
 
   const toggleTheme = () => {
-    console.log("mode")
-    console.log(mode)
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"))
+    setDesignTokens(mode)
   }
 
-  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode])
+  const setDesignTokens = (mode: PaletteMode) => {
+    if (mode === "light") {
+      updatePrimaryColor("#DEE4EA")
+      updateSecondaryColor("#454F59")
+      updateBackgroundColor("#22272B")
+      updateBackgroundPaperColor("#454F59")
+    } else {
+      updatePrimaryColor("#091E42")
+      updateSecondaryColor("#FFFFFF")
+      updateBackgroundColor("#F1F2F4")
+      updateBackgroundPaperColor("#FFFFFF")
+    }
+  }
+
+  const updatePrimaryColor = (color: string) => {
+    setPrimaryColor(color)
+    localStorage.setItem("primaryColor", color)
+  }
+
+  const updateSecondaryColor = (color: string) => {
+    setSecondaryColor(color)
+    localStorage.setItem("secondaryColor", color)
+  }
+
+  const updateBackgroundColor = (color: string) => {
+    setBackgroundColor(color)
+    localStorage.setItem("backgroundColor", color)
+  }
+
+  const updateBackgroundPaperColor = (color: string) => {
+    setBackgroundPaperColor(color)
+    localStorage.setItem("backgroundPaperColor", color)
+  }
+
+  const updateFontFamily = (font: string) => {
+    setFontFamily(font)
+    localStorage.setItem("fontFamily", font)
+  }
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+          primary: { main: primaryColor },
+          secondary: { main: secondaryColor },
+          background: { default: backgroundColor, paper: backgroundPaperColor },
+          ...(mode === "dark"
+            ? {
+                text: { primary: "#ffffff", secondary: "#F1F2F4" },
+              }
+            : {
+                text: { primary: "#000000", secondary: "#9FADBC" }, // Black text
+              }),
+        },
+        typography: { fontFamily },
+      }),
+    [mode, primaryColor, secondaryColor, backgroundColor, backgroundPaperColor, fontFamily]
+  )
 
   return (
-    <ThemeContext.Provider value={{ toggleTheme, mode }}>
+    <ThemeContext.Provider
+      value={{
+        toggleTheme,
+        mode,
+        primaryColor,
+        secondaryColor,
+        backgroundColor,
+        backgroundPaperColor,
+        fontFamily,
+        setPrimaryColor: updatePrimaryColor,
+        setSecondaryColor: updateSecondaryColor,
+        setBackgroundColor: updateBackgroundColor,
+        setBackgroundPaperColor: updateBackgroundPaperColor,
+        setFontFamily: updateFontFamily,
+      }}
+    >
       <ThemeProvider theme={theme}>
         <CssBaseline />
         {children}
