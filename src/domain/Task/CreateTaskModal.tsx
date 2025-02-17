@@ -31,7 +31,7 @@ export const CreateTaskModal = (props: CreateTaskModalProps) => {
   const initialData = {
     name: "",
     description: "",
-    assignee: "",
+    assignee: users[0].id,
     deadlineAt: new Date().toDateString(),
     category: 0,
   }
@@ -147,7 +147,7 @@ export const CreateTaskModal = (props: CreateTaskModalProps) => {
               <InputLabel id="user-select">Select assignee</InputLabel>
               <Select
                 id="user-select"
-                value={taskDetail && taskDetail.assignee ? taskDetail.assignee : users[0].id}
+                value={formData.assignee}
                 onChange={handleChange}
                 label="Select an Option"
                 name="assignee"
