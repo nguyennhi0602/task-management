@@ -24,10 +24,12 @@ export const ThemeCustomize = ({ open = false, onClose = () => {} }) => {
     primaryColor,
     secondaryColor,
     backgroundColor,
+    backgroundPaperColor,
     fontFamily,
     setPrimaryColor,
     setSecondaryColor,
     setBackgroundColor,
+    setBackgroundPaperColor,
     setFontFamily,
   } = themeContext
 
@@ -49,7 +51,7 @@ export const ThemeCustomize = ({ open = false, onClose = () => {} }) => {
         <CloseIcon />
       </IconButton>
       <DialogContent dividers>
-        <Box component="form" sx={{ "& .MuiTextField-root": { m: 1, width: "33ch" } }} noValidate autoComplete="off">
+        <Box component="form" sx={{ "& .MuiTextField-root": { m: 1, width: "100%" } }} noValidate autoComplete="off">
           <div style={{ padding: 20 }}>
             <TextField
               type="color"
@@ -71,22 +73,31 @@ export const ThemeCustomize = ({ open = false, onClose = () => {} }) => {
 
             <TextField
               type="color"
-              label="Background Color"
+              label="Background Default"
+              value={backgroundPaperColor}
+              onChange={(e) => setBackgroundPaperColor(e.target.value)}
+              fullWidth
+              style={{ marginTop: 10 }}
+            />
+
+            <TextField
+              type="color"
+              label="Background Paper"
               value={backgroundColor}
               onChange={(e) => setBackgroundColor(e.target.value)}
               fullWidth
               style={{ marginTop: 10 }}
             />
+            <FormControl sx={{ m: 1, width: "100%" }}>
+              <InputLabel>Font Family</InputLabel>
+              <Select value={fontFamily} onChange={(e) => setFontFamily(e.target.value)} label="Select an Option">
+                <MenuItem value="Arial">Arial</MenuItem>
+                <MenuItem value="Roboto">Roboto</MenuItem>
+                <MenuItem value="Georgia">Georgia</MenuItem>
+                <MenuItem value="Courier New">Courier New</MenuItem>
+              </Select>
+            </FormControl>
           </div>
-          <FormControl fullWidth style={{ marginTop: 10 }}>
-            <InputLabel>Font Family</InputLabel>
-            <Select value={fontFamily} onChange={(e) => setFontFamily(e.target.value)}>
-              <MenuItem value="Arial">Arial</MenuItem>
-              <MenuItem value="Roboto">Roboto</MenuItem>
-              <MenuItem value="Georgia">Georgia</MenuItem>
-              <MenuItem value="Courier New">Courier New</MenuItem>
-            </Select>
-          </FormControl>
         </Box>
       </DialogContent>
       <DialogActions>
